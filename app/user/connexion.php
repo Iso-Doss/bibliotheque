@@ -1,27 +1,34 @@
 <?php
+session_start();
+if(isset($_SESSION["autoriser"]))
+{
+    header("location: index.php?page=index");}
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 ?>
-
 <form action="?page=connexion-traitement" method="POST" enctype="multipart/form-data">
     <p>Page de connexion:</p>
     <table>
         <tr>
             <td colspan="2">
-                <?php
+                <?php              
                 if (isset($_GET["erreurs"]) && !empty($_GET["erreurs"])) {
                     $erreurs = json_decode($_GET["erreurs"], true);
                     foreach ($erreurs as $erreur) {
                         echo "<li>" . $erreur . "</li>";
                     }
+
                 }
 
-                if (isset($_GET["success"]) && !empty($_GET["success"])) {
-                    echo "<li>" . $_GET["success"] . "</li>";
-                }
+                if (isset($_GET["success"]) && !empty($_GET["success"]))
+                 {
+                    header("location: index.php?page=session");
+                } else
+                
+            
                 ?>
             </td>
         </tr>
