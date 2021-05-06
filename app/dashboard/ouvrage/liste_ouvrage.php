@@ -36,7 +36,7 @@
                                 <td> <?= $ouvrage->titre; ?> </td>
                                 <td> <?= $ouvrage->nbEx; ?> </td>
                                 <td style="padding: 5px;">
-                                    <a href="index.php?page=dashboard&section=modifier_ouvrage" class="" >Modier</a>
+                                    <a href="index.php?page=dashboard&section=modifier_ouvrage" class="" >Modifer</a>
                                     <a href="index.php?page=dashboard&section=supprimer_ouvrage" class="" >Supprimer</a>
                                     <a href="index.php?page=dashboard&section=activer_desactiver_ouvrage" class="" >Activer/Desactiver</a>
                                 </td>

@@ -1,5 +1,6 @@
 <?php
-$titre=$_POST['tire'];
+$nomAut=$_POST['nomAut'];
+$titre=$_POST['titre'];
 $nbEx=$_POST['nbEx'];
 $erreurs=array();
 $success="";
@@ -15,14 +16,18 @@ if(!isset($nbEx) or empty($nbEx))
 
 if(empty($errors))
 {
+    $numAut=recherche_auteur();
     $ajouter_ouvrage=ajouter_ouvrage();
     
-    if (isset($ajouter_auteurs) and !empty($ajout_auteurs)) 
+    if (isset($ajouter_ouvrage) and !empty($ajouter_ouvrage) and isset($numAut) and !empty($numAut)) 
     {
-            $success="L'auteur a été ajouter avec succes";
+        
+            $success="L'ouvrage a été ajouter avec succes";
             
-            header("location: index.php?page=dashboard&section=auteur&success=" . $success);
-           die(var_dump($success));
+            header("location: index.php?page=dashboard&section=ouvrage&success=" . $success);
+            var_dump($ajouter_ouvrage); 
+            var_dump($numAut);
+            die();
     }else{
         $erreurs[] = "Un probleme est survenue lors de la requete. Veuillez réesayer.";
  
@@ -30,6 +35,6 @@ if(empty($errors))
 }else {
     $erreurs [] = $bdd;
 }
-header("location: index.php?page=dashboard&section=ajout_auteur&erreurs=" . json_encode($erreurs));//ca nous redirige sur la page connexion en la passant en parzmetre suivie du tableau $erreurs crypté et de la variable string $success
+header("location: index.php?page=dashboard&section=ajouter_ouvrage&erreurs=" . json_encode($erreurs));//ca nous redirige sur la page connexion en la passant en parzmetre suivie du tableau $erreurs crypté et de la variable string $success
 
 ?>

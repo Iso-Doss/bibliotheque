@@ -33,10 +33,10 @@
     </tr>
         <tr>
             <td>
-                <input type="reset" value="Annuler" name="Annuler">
+                <input type="reset" value="Effacer" name="Effacer">
             </td>
             <td>
-                <input type="submit" value="Connexion" name="Connexion">
+                <input type="submit" value="Ajouter" name="Ajouter">
             </td>
         </tr>
     </table>

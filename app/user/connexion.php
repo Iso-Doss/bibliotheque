@@ -1,8 +1,9 @@
 <?php
 session_start();
-if(isset($_SESSION["autoriser"]))
+if(isset($_SESSION["autoriser"]) and !empty($_SESSION["autoriser"]) and $_SESSION["autoriser"]="oui")
 {
-    header("location: index.php?page=index");}
+//header("location: index.php?page=index");
+}
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -25,7 +26,7 @@ if(isset($_SESSION["autoriser"]))
 
                 if (isset($_GET["success"]) && !empty($_GET["success"]))
                  {
-                    header("location: index.php?page=session");
+                    header("location: index.php?page=dashboard");
                 } else
                 
             

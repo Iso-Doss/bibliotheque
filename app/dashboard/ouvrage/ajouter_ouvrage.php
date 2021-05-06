@@ -2,7 +2,7 @@
 <h1>Ajouter un ouvrage</h1>
 
 <form action="index.php?page=dashboard&section=ajouter_ouvrage_traitement" method="post">
-    <table>
+<table>
 <tr>
             <td colspan="2">
                 <?php              
@@ -15,6 +15,25 @@
                 ?>
             </td>
 </tr>
+<h3>Entrer d'abord son auteur</h3><tr>
+<td>
+            <label for="nomAut">Nom de l'auteur:</label>
+        </td>
+        <td>
+            <input id="nomAut" class="nomAut" name="nomAut" type="text" value="" placeholder="Veuillez entrez le nom de l'auteur" required>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label for="prenomAut">Prenom de l'auteur:</label>
+        </td>
+        <td>
+            <input id="prenomAut" class="prenomAut" name="prenomAut" type="text" value="" placeholder="Veuillez entrez le prénom de l'auteur" required>
+        </td>
+    </tr>
+    </table>
+    <table>
+    <h3>Entrer les informations de l'ouvrage</h3>
 <tr>
         <td>
             <label for="titre">Titre de l'ouvrage</label>

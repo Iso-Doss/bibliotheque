@@ -19,6 +19,10 @@ function get_page() {
             case "connexion-traitement":
                 include_once './app/user/connexion_traitement.php';
                 break;
+                case "index":
+                    include_once './app/user/connexion.php';
+                    break;
+               
             case "dashboard":
                     include_once './app/dashboard/index.php';
                     break;
@@ -53,15 +57,23 @@ function get_dashbord_page(){
                 case "modifier_auteur":
                          include_once './app/dashboard/auteur/modifier_auteur.php';
                          break; 
+                case "modifier_auteur_traitement":
+                            include_once './app/dashboard/auteur/modifier_auteur_traitement.php';
+                            break; 
+                
+                case "supprimer_auteur_traitement":
+                                include_once './app/dashboard/auteur/supprimer_auteur_traitement.php';
+                                break;    
+                
                 case "ouvrage":
                         include_once './app/dashboard/ouvrage/liste_ouvrage.php';
                         break; 
                 
                  case "ajouter_ouvrage":
-                            include_once './app/dashboard/ouvrage/ajout_auteur.php';
+                            include_once './app/dashboard/ouvrage/ajouter_ouvrage.php';
                             break;
                 case "ajouter_ouvrage_traitement":
-                            include_once './app/dashboard/ouvrage/ajout_auteur_traitement.php';
+                            include_once './app/dashboard/ouvrage/ajouter_ouvrage_traitement.php';
                             break;    
                 
                 default :
@@ -107,6 +119,39 @@ function ajout_auteur()
             $ajout_auteurs=$req;
             return $ajout_auteurs;
 }
+ function get_auteur($id)
+ {
+    $bdd = connect_db();
+    $reponse = $bdd->prepare('SELECT * FROM auteur where numAut=:id');
+    $reponse->execute(['id' => $id]); 
+    $Mauteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
+    return $Mauteurs;
+ }
+ function verification_id_auteur($id)
+ {
+    $bdd = connect_db();
+    $reponse = $bdd->prepare('SELECT * FROM auteur where numAut=:id');
+    $reponse->execute(['id' => $id]); 
+    $Mauteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
+    return $Mauteurs;
+ }
+ function modifier_auteur($nomAut,$prenomAut,$id)
+ {
+    $bdd = connect_db();
+    $reponse = $bdd->prepare('UPDATE auteur SET nomAut=:nomAut, prenomAut=:prenomAut where numAut =:id'); 
+    $reponse->execute(['nomAut' => $nomAut, 'prenomAut' => $prenomAut, 'id' => $id]); 
+    $modifier_auteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
+    return $modifier_auteurs;
+    
+ }
+ function supprimer_auteur($id)
+ {
+    $bdd = connect_db();
+   $reponse=$bdd->prepare('DELETE FROM auteur WHERE auteur.numAut=:id');
+   $reponse->execute(['id' => $id]); 
+    $supprimer_auteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
+    return $supprimer_auteurs;
+ }
 
 function liste_ouvrages()
 {
@@ -114,4 +159,22 @@ function liste_ouvrages()
             $reponse = $bdd->query('SELECT * FROM ouvrage');
             $ouvrages=$reponse->fetchAll(PDO::FETCH_CLASS); 
             return $ouvrages;
+}
+function recherche_auteur()
+{
+        $bdd = connect_db();
+        $reponse = $bdd->query('SELECT * FROM auteur where $nomAut=:nomAut');
+        $reponse->execute(['numAut' => $numAut]);
+    $numAut=$reponse->fetchAll(PDO::FETCH_CLASS); 
+    return $numAut;
+}
+
+
+function ajouter_ouvrage()
+{
+    $bdd = connect_db();
+    $req = $bdd->prepare("INSERT INTO ouvrage (titre,nbEx,numAut)  VALUES(:titre, :nbEx, :numAut)"); 
+    $req->execute( array('titre'=>$_POST['titre'], 'nbEx'=>$_POST['nbEx'] , 'numAut'=>$numAut));
+    $ajouter_ouvrage=$req;
+    return $ajouter_ouvrage;
 }

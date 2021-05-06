@@ -1,5 +1,6 @@
 <?php
     $auteurs = liste_auteurs();
+    //$numAut=$auteurs->numAut;
 ?>
 
 <div style="width: 1111px; background: gainsboro;">
@@ -18,25 +19,42 @@
                     <li><?php echo $_GET['success'];?></li>
                     <?php      
                 } 
+
+    
                 ?>
             
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <?php              
+                if (isset($_GET["erreurs"]) && !empty($_GET["erreurs"])) {
+                    $erreurs = json_decode($_GET["erreurs"], true);
+                    foreach ($erreurs as $erreur) {
+                        echo "<li>" . $erreur . "</li>";
+                    }
+                }
+                ?>
+            </td>
+</tr>
         <?php
             if(isset($auteurs) && !empty($auteurs)){
+              
                 ?>
                     <table border="3">
                         <tr>
                         <td><b>Nom</b></td>
-                            <td><b>Actions</b></td>
+                        <td><b>Prenom</b></td>
+                        <td><b>Actions</b></td>
                         </tr>
                         <?php foreach($auteurs as $auteur){ ?>
                             <tr>
                                 <td> <?= $auteur->nomAut; ?> </td>
+                                <td> <?= $auteur->prenomAut; ?> </td>
                                 <td style="padding: 5px;">
-                                    <a href="index.php?page=dashboard&section=modifiert_auteur" class="" >Modier</a>
-                                    <a href="index.php?page=dashboard&section=supprimer_auteur" class="" >Supprimer</a>
-                                    <a href="index.php?page=dashboard&section=aactiver_desactiver_auteur" class="" >Activer/Desactiver</a>
+                                    <a href="index.php?page=dashboard&section=modifier_auteur&id=<?= $auteur->numAut; ?>">Modifier</a>
+                                    <a href="index.php?page=dashboard&section=supprimer_auteur_traitement&id=<?= $auteur->numAut; ?>" class="" >Supprimer</a>
+                                    <a href="index.php?page=dashboard&section=activer_desactiver_auteur&id=<?= $auteur->numAut; ?>" class="" >Activer/Desactiver</a>
                                 </td>
                             </tr>
                         <?php } ?>
