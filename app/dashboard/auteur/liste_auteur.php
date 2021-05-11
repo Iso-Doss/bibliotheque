@@ -54,7 +54,7 @@
                                 <td style="padding: 5px;">
                                     <a href="index.php?page=dashboard&section=modifier_auteur&id=<?= $auteur->numAut; ?>">Modifier</a>
                                     <a href="index.php?page=dashboard&section=supprimer_auteur_traitement&id=<?= $auteur->numAut; ?>" class="" >Supprimer</a>
-                                    <a href="index.php?page=dashboard&section=activer_desactiver_auteur&id=<?= $auteur->numAut; ?>" class="" >Activer/Desactiver</a>
+                                    <a href="index.php?page=dashboard&section=activer_desactiver_auteur_traitement&id=<?= $auteur->numAut; ?>" class="" >Activer/Desactiver</a>
                                 </td>
                             </tr>
                         <?php } ?>

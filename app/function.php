@@ -64,7 +64,9 @@ function get_dashbord_page(){
                 case "supprimer_auteur_traitement":
                                 include_once './app/dashboard/auteur/supprimer_auteur_traitement.php';
                                 break;    
-                
+                case "activer_desactiver_auteur_traitement":
+                                    include_once './app/dashboard/auteur/activer_desactiver_auteur_traitement.php';
+                                    break; 
                 case "ouvrage":
                         include_once './app/dashboard/ouvrage/liste_ouvrage.php';
                         break; 
@@ -142,8 +144,8 @@ function ajout_auteur()
     $reponse->execute(['nomAut' => $nomAut, 'prenomAut' => $prenomAut, 'id' => $id]); 
     $modifier_auteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
     return $modifier_auteurs;
-    
  }
+
  function supprimer_auteur($id)
  {
     $bdd = connect_db();
@@ -152,6 +154,15 @@ function ajout_auteur()
     $supprimer_auteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
     return $supprimer_auteurs;
  }
+ function desactiver_auteur($id,$statut)
+ {
+    $bdd = connect_db();
+    $reponse = $bdd->prepare('UPDATE auteur SET statut=:statut where numAut =:id'); 
+    $reponse->execute([ 'id' => $id , 'statut'=> $statut ]); 
+    $desactiver_auteurs=$reponse->fetchAll(PDO::FETCH_CLASS); 
+    return $desactiver_auteurs;
+   
+ }  
 
 function liste_ouvrages()
 {
